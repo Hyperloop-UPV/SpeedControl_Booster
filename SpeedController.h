@@ -9,7 +9,7 @@
 //
 // Model version                  : 1.15
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Wed Jun  3 13:09:37 2026
+// C/C++ source code generated on : Wed Jun  3 20:53:07 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -23,22 +23,22 @@
 
 // Block states (default storage) for system '<Root>'
 struct DW_SpeedController_T {
-  double speed_integrator_state;       // '<S37>/Integrator'
+  float speed_integrator_state;        // '<S37>/Integrator'
 };
 
 // Parameters (default storage)
 struct P_SpeedController_T_ {
-  double Ki_speed;                     // Variable: Ki_speed
+  float Ki_speed;                      // Variable: Ki_speed
                                           //  Referenced by: '<S34>/Integral Gain'
 
-  double Kp_speed;                     // Variable: Kp_speed
+  float Kp_speed;                      // Variable: Kp_speed
                                           //  Referenced by: '<S42>/Proportional Gain'
 
-  double PIDController_InitialConditionF;
+  float PIDController_InitialConditionF;
                               // Mask Parameter: PIDController_InitialConditionF
                                  //  Referenced by: '<S37>/Integrator'
 
-  double Integrator_gainval;           // Computed Parameter: Integrator_gainval
+  float Integrator_gainval;            // Computed Parameter: Integrator_gainval
                                           //  Referenced by: '<S37>/Integrator'
 
 };
@@ -70,8 +70,7 @@ class SpeedController final
   void initialize();
 
   // model step function
-  void step(double &arg_Speed_Error, double arg_Speed_ref, double arg_Real_Speed,
-            double &arg_Iq_ref);
+  float step(float arg_Speed_ref, float arg_Real_Speed, float &arg_Speed_Error);
 
   // model terminate function
   static void terminate();

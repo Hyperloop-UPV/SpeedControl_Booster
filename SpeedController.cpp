@@ -9,7 +9,7 @@
 //
 // Model version                  : 1.15
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Wed Jun  3 13:09:37 2026
+// C/C++ source code generated on : Wed Jun  3 20:53:07 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -23,30 +23,33 @@ P_SpeedController_T SpeedController::SpeedController_P{
   // Variable: Ki_speed
   //  Referenced by: '<S34>/Integral Gain'
 
-  15.0,
+  15.0F,
 
   // Variable: Kp_speed
   //  Referenced by: '<S42>/Proportional Gain'
 
-  6.0,
+  6.0F,
 
   // Mask Parameter: PIDController_InitialConditionF
   //  Referenced by: '<S37>/Integrator'
 
-  0.0,
+  0.0F,
 
   // Computed Parameter: Integrator_gainval
   //  Referenced by: '<S37>/Integrator'
 
-  0.0005
+  0.0005F
 };
 
 // Model step function
-void SpeedController::step(double &arg_Speed_Error, double arg_Speed_ref, double
-  arg_Real_Speed, double &arg_Iq_ref)
+float SpeedController::step(float arg_Speed_ref, float arg_Real_Speed, float
+  &arg_Speed_Error)
 {
-  double Integrator;
-  double Integrator_tmp;
+  float Integrator;
+  float Integrator_tmp;
+
+  // specified return value
+  float arg_Iq_ref;
 
   // Sum: '<Root>/Sum' incorporates:
   //   Inport: '<Root>/Real_Speed'
@@ -71,6 +74,7 @@ void SpeedController::step(double &arg_Speed_Error, double arg_Speed_ref, double
 
   // Update for DiscreteIntegrator: '<S37>/Integrator'
   SpeedController_DW.speed_integrator_state = Integrator_tmp + Integrator;
+  return arg_Iq_ref;
 }
 
 // Model initialize function
