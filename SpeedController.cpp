@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'SpeedController'.
 //
-// Model version                  : 1.15
+// Model version                  : 1.16
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Wed Jun  3 20:53:07 2026
+// C/C++ source code generated on : Thu Jun  4 18:26:32 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -17,29 +17,6 @@
 // Validation result: Not run
 //
 #include "SpeedController.h"
-
-// Block parameters (default storage)
-P_SpeedController_T SpeedController::SpeedController_P{
-  // Variable: Ki_speed
-  //  Referenced by: '<S34>/Integral Gain'
-
-  15.0F,
-
-  // Variable: Kp_speed
-  //  Referenced by: '<S42>/Proportional Gain'
-
-  6.0F,
-
-  // Mask Parameter: PIDController_InitialConditionF
-  //  Referenced by: '<S37>/Integrator'
-
-  0.0F,
-
-  // Computed Parameter: Integrator_gainval
-  //  Referenced by: '<S37>/Integrator'
-
-  0.0005F
-};
 
 // Model step function
 float SpeedController::step(float arg_Speed_ref, float arg_Real_Speed, float
@@ -60,8 +37,7 @@ float SpeedController::step(float arg_Speed_ref, float arg_Real_Speed, float
   // DiscreteIntegrator: '<S37>/Integrator' incorporates:
   //   Gain: '<S34>/Integral Gain'
 
-  Integrator_tmp = SpeedController_P.Ki_speed * arg_Speed_Error *
-    SpeedController_P.Integrator_gainval;
+  Integrator_tmp = 15.0F * arg_Speed_Error * 0.0005F;
 
   // DiscreteIntegrator: '<S37>/Integrator'
   Integrator = Integrator_tmp + SpeedController_DW.speed_integrator_state;
@@ -70,7 +46,7 @@ float SpeedController::step(float arg_Speed_ref, float arg_Real_Speed, float
   //   Gain: '<S42>/Proportional Gain'
   //   Sum: '<S46>/Sum'
 
-  arg_Iq_ref = SpeedController_P.Kp_speed * arg_Speed_Error + Integrator;
+  arg_Iq_ref = 6.0F * arg_Speed_Error + Integrator;
 
   // Update for DiscreteIntegrator: '<S37>/Integrator'
   SpeedController_DW.speed_integrator_state = Integrator_tmp + Integrator;
@@ -80,9 +56,7 @@ float SpeedController::step(float arg_Speed_ref, float arg_Real_Speed, float
 // Model initialize function
 void SpeedController::initialize()
 {
-  // InitializeConditions for DiscreteIntegrator: '<S37>/Integrator'
-  SpeedController_DW.speed_integrator_state =
-    SpeedController_P.PIDController_InitialConditionF;
+  // (no initialization code required)
 }
 
 // Model terminate function

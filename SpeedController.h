@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'SpeedController'.
 //
-// Model version                  : 1.15
+// Model version                  : 1.16
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Wed Jun  3 20:53:07 2026
+// C/C++ source code generated on : Thu Jun  4 18:26:32 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -25,26 +25,6 @@
 struct DW_SpeedController_T {
   float speed_integrator_state;        // '<S37>/Integrator'
 };
-
-// Parameters (default storage)
-struct P_SpeedController_T_ {
-  float Ki_speed;                      // Variable: Ki_speed
-                                          //  Referenced by: '<S34>/Integral Gain'
-
-  float Kp_speed;                      // Variable: Kp_speed
-                                          //  Referenced by: '<S42>/Proportional Gain'
-
-  float PIDController_InitialConditionF;
-                              // Mask Parameter: PIDController_InitialConditionF
-                                 //  Referenced by: '<S37>/Integrator'
-
-  float Integrator_gainval;            // Computed Parameter: Integrator_gainval
-                                          //  Referenced by: '<S37>/Integrator'
-
-};
-
-// Parameters (default storage)
-typedef struct P_SpeedController_T_ P_SpeedController_T;
 
 // Class declaration for model SpeedController
 class SpeedController final
@@ -67,7 +47,7 @@ class SpeedController final
   DW_SpeedController_T SpeedController_DW;
 
   // model initialize function
-  void initialize();
+  static void initialize();
 
   // model step function
   float step(float arg_Speed_ref, float arg_Real_Speed, float &arg_Speed_Error);
@@ -80,11 +60,6 @@ class SpeedController final
 
   // Destructor
   ~SpeedController();
-
-  // private data and function members
- private:
-  // Tunable parameters
-  static P_SpeedController_T SpeedController_P;
 };
 
 //-
